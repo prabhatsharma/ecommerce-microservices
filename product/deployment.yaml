@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product
+  namespace: ecommerce
+spec:
+  selector:
+    matchLabels:
+      app: product
+  template:
+    metadata:
+      labels:
+        app: product
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8082"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: product
+        image: hiprabhat/ecommerce-product:v5
+        imagePullPolicy: Always
+        env:
+        - name: REVIEW_SERVICE_URL
+          value: http://review.ecommerce.svc.cluster.local/review
+        - name: RECOMMENDATION_SERVICE_URL
+          value: http://recommendation.ecommerce.svc.cluster.local/recommendation
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8082
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: product
+  namespace: ecommerce
+  labels:
+    app: product
+spec:
+  selector:
+    app: product
+  ports:
+  - port: 80
+    targetPort: 8082
+    name: http-product

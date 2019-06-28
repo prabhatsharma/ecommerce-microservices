@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: person
+  namespace: ecommerce
+spec:
+  selector:
+    matchLabels:
+      app: person
+  template:
+    metadata:
+      labels:
+        app: person
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: person
+        image: hiprabhat/ecommerce-person:v5
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: person
+  namespace: ecommerce
+  labels:
+    app: person
+spec:
+  selector:
+    app: person
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http-person
