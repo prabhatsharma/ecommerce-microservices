@@ -22,9 +22,9 @@ spec:
         imagePullPolicy: Always
         env:
         - name: REVIEW_SERVICE_URL
-          value: http://review.ecommerce.svc.cluster.local/review
+          value: http://review.ecommerce.svc.cluster.local/
         - name: RECOMMENDATION_SERVICE_URL
-          value: http://recommendation.ecommerce.svc.cluster.local/recommendation
+          value: http://recommendation.ecommerce.svc.cluster.local/
         resources:
           limits:
             memory: "128Mi"

@@ -12,7 +12,7 @@ func main() {
 
 	r := gin.Default()
 
-	r.GET("/product", getProduct)
+	r.GET("/", getProduct)
 
 	r.Run(":8082")
 }
@@ -43,7 +43,7 @@ func getProduct(c *gin.Context) {
 	reviewServiceURL := os.Getenv("REVIEW_SERVICE_URL")
 
 	if reviewServiceURL == "" {
-		reviewServiceURL = "http://localhost:8081/review"
+		reviewServiceURL = "http://localhost:8081/"
 	}
 
 	resp, err := resty.R().Get(reviewServiceURL)
@@ -61,7 +61,7 @@ func getProduct(c *gin.Context) {
 	recommendationURL := os.Getenv("RECOMMENDATION_SERVICE_URL")
 
 	if recommendationURL == "" {
-		recommendationURL = "http://localhost:8083/recommendation"
+		recommendationURL = "http://localhost:8083/"
 	}
 
 	resp1, err1 := resty.R().Get(recommendationURL)
