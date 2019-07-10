@@ -8,7 +8,7 @@ func main() {
 
 	r := gin.Default()
 
-	r.GET("/recommendation", getRecommendations)
+	r.GET("/", getRecommendations)
 
 	r.Run(":8083")
 }

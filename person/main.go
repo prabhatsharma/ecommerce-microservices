@@ -6,7 +6,7 @@ func main() {
 
 	r := gin.Default()
 
-	r.GET("/person", getPerson)
+	r.GET("/", getPerson)
 
 	r.Run(":8080")
 }

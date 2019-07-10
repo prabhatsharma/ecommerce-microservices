@@ -13,7 +13,7 @@ func main() {
 
 	r := gin.Default()
 
-	r.GET("/review", getReview)
+	r.GET("/", getReview)
 
 	r.Run(":8081")
 }
@@ -38,7 +38,7 @@ func getReview(c *gin.Context) {
 	personServiceURL := os.Getenv("PERSON_SERVICE_URL")
 
 	if personServiceURL == "" {
-		personServiceURL = "http://localhost:8080/person"
+		personServiceURL = "http://localhost:8080/"
 	}
 
 	resp, err := resty.R().Get(personServiceURL)

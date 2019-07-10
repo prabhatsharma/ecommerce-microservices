@@ -23,7 +23,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: PERSON_SERVICE_URL
-          value: http://person.ecommerce.svc.cluster.local/person
+          value: http://person.ecommerce.svc.cluster.local/
         resources:
           limits:
             memory: "128Mi"
