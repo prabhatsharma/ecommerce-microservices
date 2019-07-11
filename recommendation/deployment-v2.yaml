@@ -1,33 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: review-v7
+  name: recommendation-v2
   namespace: ecommerce
 spec:
   selector:
     matchLabels:
-      app: review
+      app: recommendation
   template:
     metadata:
       labels:
-        app: review
-        version: v7
+        app: recommendation
+        version: v2
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "8081"
+        prometheus.io/port: "8083"
         prometheus.io/path: "/metrics"
     spec:
       containers:
-      - name: review
-        image: hiprabhat/ecommerce-review:v7
+      - name: recommendation
+        image: hiprabhat/ecommerce-recommendation:v2
         imagePullPolicy: Always
-        env:
-        - name: PERSON_SERVICE_URL
-          value: http://person.ecommerce.svc.cluster.local/
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 8081
-
+        - containerPort: 8083

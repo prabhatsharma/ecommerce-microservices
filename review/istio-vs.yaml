@@ -10,9 +10,9 @@ spec:
   - route:
     - destination:
         host: review
-        subset: v6
+        subset: v1
       weight: 50
     - destination:
         host: review
-        subset: v7
+        subset: v2
       weight: 50

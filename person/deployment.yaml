@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: person
-        image: hiprabhat/ecommerce-person:v5
+        image: hiprabhat/ecommerce-person:v1
         imagePullPolicy: Always
         resources:
           limits:

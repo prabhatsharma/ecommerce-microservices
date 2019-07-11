@@ -22,12 +22,12 @@ type Product struct {
 func getRecommendations(c *gin.Context) {
 	product1 := Product{
 		ID:          2,
-		Description: "some sample item. Version 6",
+		Description: "some sample item. v1",
 	}
 
 	product2 := Product{
 		ID:          3,
-		Description: "another sample item. Version 6",
+		Description: "another sample item. v1",
 	}
 
 	products := []Product{}

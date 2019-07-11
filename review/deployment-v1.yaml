@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: review-v6
+  name: review-v1
   namespace: ecommerce
 spec:
   selector:
@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: review
-        version: v6
+        version: v1
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8081"
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: review
-        image: hiprabhat/ecommerce-review:v6
+        image: hiprabhat/ecommerce-review:v1
         imagePullPolicy: Always
         env:
         - name: PERSON_SERVICE_URL

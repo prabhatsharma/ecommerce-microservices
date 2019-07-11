@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: recommendation-v6
+  name: recommendation-v1
   namespace: ecommerce
 spec:
   selector:
@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: recommendation
-        version: v6
+        version: v1
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8083"
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: recommendation
-        image: hiprabhat/ecommerce-recommendation:v6
+        image: hiprabhat/ecommerce-recommendation:v1
         imagePullPolicy: Always
         resources:
           limits:
