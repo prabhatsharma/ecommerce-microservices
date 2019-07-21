@@ -1,5 +1,5 @@
 # A Go multistage docker file
-FROM golang:1.12.6 as builder
+FROM golang:1.12.7 as builder
 RUN mkdir /build 
 ADD . /build/
 WORKDIR /build 

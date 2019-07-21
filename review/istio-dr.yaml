@@ -2,6 +2,9 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: review
+  namespace: ecommerce
+  labels:
+    app: review
 spec:
   host: review
   subsets:

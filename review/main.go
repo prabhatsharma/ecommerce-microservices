@@ -56,7 +56,7 @@ func getReview(c *gin.Context) {
 
 	review1 := Review{
 		ReviewID:    1,
-		Description: "This is fantastic product. Version v1",
+		Description: "This is fantastic product. Version v2",
 		Stars:       5,
 		ReviewerID:  1,
 		Reviewer:    reviewer,
@@ -64,7 +64,7 @@ func getReview(c *gin.Context) {
 
 	review2 := Review{
 		ReviewID:    2,
-		Description: "This is cool product but can improve. Version v1",
+		Description: "This is cool product but can improve. Version v2",
 		Stars:       4,
 		ReviewerID:  1,
 		Reviewer:    reviewer,

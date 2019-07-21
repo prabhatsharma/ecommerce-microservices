@@ -3,6 +3,8 @@ kind: VirtualService
 metadata:
   name: recommendation
   namespace: ecommerce
+  labels:
+    app: recommendation
 spec:
   hosts:
     - recommendation
@@ -11,8 +13,8 @@ spec:
     - destination:
         host: recommendation
         subset: v1
-      weight: 50
+      weight: 10
     - destination:
         host: recommendation
         subset: v2
-      weight: 50
+      weight: 90
