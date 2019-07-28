@@ -1,0 +1,30 @@
+  apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/subnets: subnet-0d689bb55a8887527,subnet-02c86eccbafb21d37,subnet-066430f9f314597ed
+      # specify 2 security groups. 1. for incoming http/https traffic from internet. create this sg. 2. shared security group that allows access from LB to nodes. shared sg is assigned to worker nodes and LB. Get this SG from worker node sg list.
+      alb.ingress.kubernetes.io/security-groups: sg-01f67de68e20b505a, sg-0046b62f4aa2359b5
+      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:107995894928:certificate/7a78ff2b-131a-4d09-b8e3-89bfa2fa9499, arn:aws:acm:us-west-2:107995894928:certificate/0a4af9df-15e8-41a7-a8f5-4afaf6bd3395
+    name: alb-api
+    namespace: ecommerce
+  spec:
+    rules:
+      - host: person.99chains.com
+        http:
+          paths:
+            - path: /
+              backend:
+                serviceName: person
+                servicePort: 80
+      - host: review.prabhatsharma.com
+        http:
+          paths:
+            - path: /
+              backend:
+                serviceName: review
+                servicePort: 80
