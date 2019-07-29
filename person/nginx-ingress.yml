@@ -1,0 +1,16 @@
+  apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    name: ingress-person
+    namespace: ecommerce
+  spec:
+    rules:
+      - host: person.nginx.prabhatsharma.com
+        http:
+          paths:
+            - backend:
+                serviceName: person
+                servicePort: 80
+              path: /

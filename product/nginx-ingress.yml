@@ -1,0 +1,16 @@
+  apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    name: ingress-product
+    namespace: ecommerce
+  spec:
+    rules:
+      - host: product.nginx.prabhatsharma.com
+        http:
+          paths:
+            - backend:
+                serviceName: product
+                servicePort: 80
+              path: /
