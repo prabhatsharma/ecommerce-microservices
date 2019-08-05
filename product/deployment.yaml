@@ -4,6 +4,7 @@ metadata:
   name: product
   namespace: ecommerce
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: product

@@ -4,6 +4,7 @@ metadata:
   name: person
   namespace: ecommerce
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: person

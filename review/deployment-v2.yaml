@@ -4,6 +4,7 @@ metadata:
   name: review-v2
   namespace: ecommerce
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: review

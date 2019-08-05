@@ -4,6 +4,7 @@ metadata:
   name: recommendation-v1
   namespace: ecommerce
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: recommendation
