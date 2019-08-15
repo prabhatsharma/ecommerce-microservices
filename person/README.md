@@ -2,6 +2,8 @@
 
 We will use this microservice to learn helm.
 
+## Create Helm chart
+
 To create a helm chart:
 
 > helm create person
@@ -21,6 +23,8 @@ person
 └── values.yaml
 ```
 
+## Configure helm chart
+
 change repository and tag in the file values.yaml to:
 
 ```
@@ -38,6 +42,8 @@ change containerPort in person/templates/deployment.yaml to:
       containerPort: 8080
 ```
 
+
+## Deploy microservice using helm chart
 
 Run the below command to deploy using helm 
 
@@ -74,11 +80,13 @@ You should see the output:
 ```json
 {
 uid: 1,
-uname: "Prabhat Sharma"
+uname: "Prabhat Sharma v1"
 }
 ```
 
 Type Cmd +C (on mac), Ctrl+c (on Windows, linux) to stop port forwarding
+
+## Upgrade microservice using helm chart
 
 Now let's upgrade our deployment
 

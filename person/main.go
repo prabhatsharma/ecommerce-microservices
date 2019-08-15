@@ -15,6 +15,6 @@ func getPerson(c *gin.Context) {
 
 	c.JSON(200, gin.H{
 		"uid":   1,
-		"uname": "Prabhat Sharma",
+		"uname": "Prabhat Sharma v2",
 	})
 }
