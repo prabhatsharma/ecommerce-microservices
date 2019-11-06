@@ -1,0 +1,852 @@
+   0.0 TEL | Telepresence 0.103 launched at Wed Nov  6 00:17:24 2019
+   0.0 TEL |   /usr/local/bin/telepresence
+   0.0 TEL | uname: uname_result(system='Darwin', node='186590d26ead.ant.amazon.com', release='18.7.0', version='Darwin Kernel Version 18.7.0: Sat Oct 12 00:02:19 PDT 2019; root:xnu-4903.278.12~1/RELEASE_X86_64', machine='x86_64', processor='i386')
+   0.0 TEL | Platform: darwin
+   0.0 TEL | WSL: False
+   0.0 TEL | Python 3.6.9 |Anaconda custom (x86_64)| (default, Jul 30 2019, 13:42:17)
+   0.0 TEL | [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
+   0.1 TEL | BEGIN SPAN main.py:40(main)
+   0.1 TEL | BEGIN SPAN startup.py:83(set_kube_command)
+   0.1 TEL | Found kubectl -> /usr/local/bin/kubectl
+   0.1 TEL | [1] Capturing: kubectl version --short
+   1.0 TEL | [1] captured in 0.92 secs.
+   1.0 TEL | [2] Capturing: kubectl config current-context
+   1.1 TEL | [2] captured in 0.08 secs.
+   1.1 TEL | [3] Capturing: kubectl config view -o json
+   1.1 TEL | [3] captured in 0.08 secs.
+   1.1 TEL | [4] Capturing: kubectl --context oregon14 get ns ecommerce
+   2.4 TEL | [4] captured in 1.23 secs.
+   2.4 TEL | [5] Capturing: kubectl api-versions
+   2.9 TEL | [5] captured in 0.51 secs.
+   2.9 TEL | Command: kubectl 1.16.2
+   2.9 TEL | Context: oregon14, namespace: ecommerce, version: 1.14.7-eks-e9b1d0
+   2.9 TEL | Warning: kubectl 1.16.2 may not work correctly with cluster version 1.14.7-eks-e9b1d0 due to the version discrepancy. See https://kubernetes.io/docs/setup/version-skew-policy/ for more information.
+   2.9 TEL | END SPAN startup.py:83(set_kube_command)    2.8s
+   2.9 TEL | Found ssh -> /usr/bin/ssh
+   2.9 TEL | [6] Capturing: ssh -V
+   2.9 TEL | [6] captured in 0.04 secs.
+   2.9 TEL | Found bash -> /bin/bash
+   2.9 TEL | Found sshuttle-telepresence -> /usr/local/Cellar/telepresence/0.103/libexec/sshuttle-telepresence
+   2.9 TEL | Found pfctl -> /sbin/pfctl
+   2.9 TEL | Found sudo -> /usr/bin/sudo
+   2.9 TEL | [7] Running: sudo -n echo -n
+   3.0   7 | sudo: a password is required
+   3.0 TEL | [7] exit 1 in 0.06 secs.
+   3.0 >>> | How Telepresence uses sudo: https://www.telepresence.io/reference/install#dependencies
+   3.0 >>> | Invoking sudo. Please enter your sudo password.
+   3.0 TEL | [8] Running: sudo echo -n
+   8.1 TEL | [8] ran in 5.13 secs.
+   8.1 >>> | Starting proxy with method 'vpn-tcp', which has the following limitations: All processes are affected, only one telepresence can run per machine, and you can't use other VPNs. You may need to add cloud hosts and headless services with --also-proxy. For a full list of method limitations see https://telepresence.io/reference/methods.html
+   8.1 TEL | Found sshfs -> /usr/local/bin/sshfs
+   8.1 TEL | Found umount -> /sbin/umount
+   8.1 >>> | Volumes are rooted at $TELEPRESENCE_ROOT. See https://telepresence.io/howto/volumes.html for details.
+   8.1 TEL | [9] Running: kubectl --context oregon14 --namespace ecommerce get pods telepresence-connectivity-check --ignore-not-found
+   8.8 TEL | [9] ran in 0.66 secs.
+   9.2 TEL | Scout info: {'latest_version': '0.103', 'application': 'telepresence', 'notices': []}
+   9.2 TEL | BEGIN SPAN deployment.py:108(create_new_deployment)
+   9.2 >>> | Starting network proxy to cluster using new Deployment telepresence-1573028244-055338-49272
+   9.2 TEL | [10] Running: kubectl --context oregon14 --namespace ecommerce delete --ignore-not-found svc,deploy --selector=telepresence=4aefcdd00fd04fdf98ced0232520ae70
+  10.0  10 | No resources found
+  10.0 TEL | [10] ran in 0.80 secs.
+  10.0 TEL | [11] Running: kubectl --context oregon14 --namespace ecommerce run --restart=Always --limits=cpu=1000m,memory=256Mi --requests=cpu=25m,memory=64Mi telepresence-1573028244-055338-49272 --image=datawire/telepresence-k8s:0.103 --labels=telepresence=4aefcdd00fd04fdf98ced0232520ae70
+  10.3  11 | kubectl run --generator=deployment/apps.v1 is DEPRECATED and will be removed in a future version. Use kubectl run --generator=run-pod/v1 or kubectl create instead.
+  10.5  11 | deployment.apps/telepresence-1573028244-055338-49272 created
+  10.5 TEL | [11] ran in 0.50 secs.
+  10.5 TEL | END SPAN deployment.py:108(create_new_deployment)    1.3s
+  10.5 TEL | BEGIN SPAN remote.py:142(get_remote_info)
+  10.5 TEL | BEGIN SPAN remote.py:75(get_deployment_json)
+  10.5 TEL | [12] Capturing: kubectl --context oregon14 --namespace ecommerce get deployment -o json --selector=telepresence=4aefcdd00fd04fdf98ced0232520ae70
+  11.0 TEL | [12] captured in 0.53 secs.
+  11.0 TEL | END SPAN remote.py:75(get_deployment_json)    0.5s
+  11.0 TEL | Searching for Telepresence pod:
+  11.0 TEL |   with name telepresence-1573028244-055338-49272-*
+  11.0 TEL |   with labels {'telepresence': '4aefcdd00fd04fdf98ced0232520ae70'}
+  11.0 TEL | [13] Capturing: kubectl --context oregon14 --namespace ecommerce get pod -o json --selector=telepresence=4aefcdd00fd04fdf98ced0232520ae70
+  11.6 TEL | [13] captured in 0.62 secs.
+  11.6 TEL | Checking telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh
+  11.6 TEL | Looks like we've found our pod!
+  11.6 TEL | BEGIN SPAN remote.py:104(wait_for_pod)
+  11.6 TEL | [14] Capturing: kubectl --context oregon14 --namespace ecommerce get pod telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh -o json
+  12.2 TEL | [14] captured in 0.56 secs.
+  12.4 TEL | [15] Capturing: kubectl --context oregon14 --namespace ecommerce get pod telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh -o json
+  13.6 TEL | [15] captured in 1.19 secs.
+  13.9 TEL | [16] Capturing: kubectl --context oregon14 --namespace ecommerce get pod telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh -o json
+  15.2 TEL | [16] captured in 1.33 secs.
+  15.4 TEL | [17] Capturing: kubectl --context oregon14 --namespace ecommerce get pod telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh -o json
+  16.6 TEL | [17] captured in 1.14 secs.
+  16.8 TEL | [18] Capturing: kubectl --context oregon14 --namespace ecommerce get pod telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh -o json
+  17.5 TEL | [18] captured in 0.61 secs.
+  17.7 TEL | [19] Capturing: kubectl --context oregon14 --namespace ecommerce get pod telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh -o json
+  18.2 TEL | [19] captured in 0.51 secs.
+  18.5 TEL | [20] Capturing: kubectl --context oregon14 --namespace ecommerce get pod telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh -o json
+  19.1 TEL | [20] captured in 0.62 secs.
+  19.1 TEL | END SPAN remote.py:104(wait_for_pod)    7.5s
+  19.1 TEL | END SPAN remote.py:142(get_remote_info)    8.6s
+  19.1 TEL | BEGIN SPAN connect.py:37(connect)
+  19.1 TEL | [21] Launching kubectl logs: kubectl --context oregon14 --namespace ecommerce logs -f telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh --container telepresence-1573028244-055338-49272 --tail=10
+  19.1 TEL | [22] Launching kubectl port-forward: kubectl --context oregon14 --namespace ecommerce port-forward telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh 55401:8022
+  19.1 TEL | [23] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -q -p 55401 telepresence@127.0.0.1 /bin/true
+  19.2 TEL | [23] exit 255 in 0.04 secs.
+  19.4 TEL | [24] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -q -p 55401 telepresence@127.0.0.1 /bin/true
+  19.4 TEL | [24] exit 255 in 0.02 secs.
+  19.7 TEL | [25] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -q -p 55401 telepresence@127.0.0.1 /bin/true
+  19.7 TEL | [25] exit 255 in 0.02 secs.
+  19.7  21 | 2019-11-06T08:17:30+0000 [-] Loading ./forwarder.py...
+  19.7  21 | 2019-11-06T08:17:30+0000 [-] /etc/resolv.conf changed, reparsing
+  19.7  21 | 2019-11-06T08:17:30+0000 [-] Resolver added ('172.20.0.10', 53) to server list
+  19.7  21 | 2019-11-06T08:17:30+0000 [-] SOCKSv5Factory starting on 9050
+  19.7  21 | 2019-11-06T08:17:30+0000 [socks.SOCKSv5Factory#info] Starting factory <socks.SOCKSv5Factory object at 0x7f4e6b26ad30>
+  19.7  21 | 2019-11-06T08:17:30+0000 [-] DNSDatagramProtocol starting on 9053
+  19.7  21 | 2019-11-06T08:17:30+0000 [-] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fd128>
+  19.7  21 | 2019-11-06T08:17:30+0000 [-] Loaded.
+  19.7  21 | 2019-11-06T08:17:30+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] twistd 19.7.0 (/usr/bin/python3.6 3.6.8) starting up.
+  19.7  21 | 2019-11-06T08:17:30+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] reactor class: twisted.internet.epollreactor.EPollReactor.
+  20.0  22 | Forwarding from 127.0.0.1:55401 -> 8022
+  20.0  22 | Forwarding from [::1]:55401 -> 8022
+  20.0 TEL | [26] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -q -p 55401 telepresence@127.0.0.1 /bin/true
+  20.0  22 | Handling connection for 55401
+  20.4 TEL | [26] ran in 0.45 secs.
+  20.4 >>> | 
+  20.4 >>> | No traffic is being forwarded from the remote Deployment to your local machine. You can use the --expose option to specify which ports you want to forward.
+  20.4 >>> | 
+  20.4 TEL | Launching Web server for proxy poll
+  20.4 TEL | [27] Launching SSH port forward (socks and proxy poll): ssh -N -oServerAliveInterval=1 -oServerAliveCountMax=10 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -q -p 55401 telepresence@127.0.0.1 -L127.0.0.1:55413:127.0.0.1:9050 -R9055:127.0.0.1:55414
+  20.4 TEL | END SPAN connect.py:37(connect)    1.3s
+  20.4 TEL | BEGIN SPAN remote_env.py:28(get_remote_env)
+  20.4 TEL | [28] Capturing: kubectl --context oregon14 --namespace ecommerce exec telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh --container telepresence-1573028244-055338-49272 -- python3 podinfo.py
+  20.4  22 | Handling connection for 55401
+  21.4 TEL | [28] captured in 0.95 secs.
+  21.4 TEL | END SPAN remote_env.py:28(get_remote_env)    1.0s
+  21.4 TEL | BEGIN SPAN mount.py:30(mount_remote_volumes)
+  21.4 TEL | [29] Running: sshfs -p 55401 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null telepresence@127.0.0.1:/ /tmp/tel-yqg48enx/fs
+  21.7  22 | Handling connection for 55401
+  22.1 TEL | [29] ran in 0.76 secs.
+  22.1 TEL | END SPAN mount.py:30(mount_remote_volumes)    0.8s
+  22.1 TEL | BEGIN SPAN vpn.py:262(connect_sshuttle)
+  22.1 TEL | BEGIN SPAN vpn.py:73(get_proxy_cidrs)
+  22.1 TEL | [30] Capturing: kubectl --context oregon14 --namespace ecommerce get nodes -o json
+  22.9 TEL | [30] captured in 0.75 secs.
+  22.9 TEL | [31] Capturing: kubectl --context oregon14 --namespace ecommerce get services -o json
+  23.5 TEL | [31] captured in 0.62 secs.
+  23.5 TEL | [32] Running: kubectl --context oregon14 --namespace ecommerce create service clusterip telepresence-1573028267-57375-49272 --tcp=3000
+  23.9  32 | service/telepresence-1573028267-57375-49272 created
+  23.9 TEL | [32] ran in 0.38 secs.
+  23.9 TEL | [33] Running: kubectl --context oregon14 --namespace ecommerce create service clusterip telepresence-1573028267-95712-49272 --tcp=3000
+  24.4  33 | service/telepresence-1573028267-95712-49272 created
+  24.4 TEL | [33] ran in 0.51 secs.
+  24.4 TEL | [34] Running: kubectl --context oregon14 --namespace ecommerce create service clusterip telepresence-1573028268-4712162-49272 --tcp=3000
+  25.3  34 | service/telepresence-1573028268-4712162-49272 created
+  25.3 TEL | [34] ran in 0.92 secs.
+  25.3 TEL | [35] Running: kubectl --context oregon14 --namespace ecommerce create service clusterip telepresence-1573028269-387412-49272 --tcp=3000
+  26.2  35 | service/telepresence-1573028269-387412-49272 created
+  26.2 TEL | [35] ran in 0.84 secs.
+  26.2 TEL | [36] Capturing: kubectl --context oregon14 --namespace ecommerce get services -o json
+  26.9 TEL | [36] captured in 0.71 secs.
+  26.9 TEL | [37] Running: kubectl --context oregon14 --namespace ecommerce delete service telepresence-1573028267-57375-49272
+  27.8  37 | service "telepresence-1573028267-57375-49272" deleted
+  27.8 TEL | [37] ran in 0.92 secs.
+  27.8 TEL | [38] Running: kubectl --context oregon14 --namespace ecommerce delete service telepresence-1573028267-95712-49272
+  28.6  38 | service "telepresence-1573028267-95712-49272" deleted
+  28.6 TEL | [38] ran in 0.80 secs.
+  28.6 TEL | [39] Running: kubectl --context oregon14 --namespace ecommerce delete service telepresence-1573028268-4712162-49272
+  29.2  39 | service "telepresence-1573028268-4712162-49272" deleted
+  29.3 TEL | [39] ran in 0.66 secs.
+  29.3 TEL | [40] Running: kubectl --context oregon14 --namespace ecommerce delete service telepresence-1573028269-387412-49272
+  29.9  40 | service "telepresence-1573028269-387412-49272" deleted
+  30.0 TEL | [40] ran in 0.68 secs.
+  30.0 >>> | Guessing that Services IP range is 172.20.0.0/16. Services started after this point will be inaccessible if are outside this range; restart telepresence if you can't access a new Service.
+  30.0 TEL | END SPAN vpn.py:73(get_proxy_cidrs)    7.8s
+  30.0 TEL | [41] Launching sshuttle: sshuttle-telepresence -v --dns --method auto -e 'ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null' -r telepresence@127.0.0.1:55401 --to-ns 127.0.0.1:9053 172.20.0.0/16
+  30.0 TEL | BEGIN SPAN vpn.py:285(connect_sshuttle,sshuttle-wait)
+  30.0 TEL | Wait for vpn-tcp connection: hellotelepresence-0
+  30.0 TEL | [42] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-0")'
+  30.2 TEL | [42] exit 1 in 0.20 secs.
+  30.2 TEL | [43] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-0.a.sanity.check.telepresence.io")'
+  30.4 TEL | [43] exit 1 in 0.18 secs.
+  30.5 TEL | Wait for vpn-tcp connection: hellotelepresence-1
+  30.5 TEL | [44] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-1")'
+  30.6 TEL | [44] exit 1 in 0.18 secs.
+  30.7 TEL | [45] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-1.a.sanity.check.telepresence.io")'
+  30.8 TEL | [45] exit 1 in 0.13 secs.
+  30.9 TEL | Wait for vpn-tcp connection: hellotelepresence-2
+  30.9 TEL | [46] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-2")'
+  31.0 TEL | [46] exit 1 in 0.13 secs.
+  31.0 TEL | [47] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-2.a.sanity.check.telepresence.io")'
+  31.1 TEL | [47] exit 1 in 0.12 secs.
+  31.2 TEL | Wait for vpn-tcp connection: hellotelepresence-3
+  31.2 TEL | [48] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-3")'
+  31.4 TEL | [48] exit 1 in 0.13 secs.
+  31.4 TEL | [49] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-3.a.sanity.check.telepresence.io")'
+  31.5 TEL | [49] exit 1 in 0.13 secs.
+  31.6 TEL | Wait for vpn-tcp connection: hellotelepresence-4
+  31.6 TEL | [50] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-4")'
+  31.7  41 | Starting sshuttle proxy.
+  31.8 TEL | [50] exit 1 in 0.23 secs.
+  31.8 TEL | [51] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-4.a.sanity.check.telepresence.io")'
+  32.1 TEL | [51] exit 1 in 0.29 secs.
+  32.2 TEL | Wait for vpn-tcp connection: hellotelepresence-5
+  32.2 TEL | [52] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-5")'
+  32.5 TEL | [52] exit 1 in 0.28 secs.
+  32.5 TEL | [53] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-5.a.sanity.check.telepresence.io")'
+  32.6 TEL | [53] exit 1 in 0.13 secs.
+  32.7 TEL | Wait for vpn-tcp connection: hellotelepresence-6
+  32.7 TEL | [54] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-6")'
+  32.9 TEL | [54] exit 1 in 0.20 secs.
+  32.9 TEL | [55] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-6.a.sanity.check.telepresence.io")'
+  33.1 TEL | [55] exit 1 in 0.13 secs.
+  33.2 TEL | Wait for vpn-tcp connection: hellotelepresence-7
+  33.2 TEL | [56] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-7")'
+  33.3 TEL | [56] exit 1 in 0.13 secs.
+  33.3 TEL | [57] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-7.a.sanity.check.telepresence.io")'
+  33.4 TEL | [57] exit 1 in 0.13 secs.
+  33.5 TEL | Wait for vpn-tcp connection: hellotelepresence-8
+  33.5 TEL | [58] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-8")'
+  33.8 TEL | [58] exit 1 in 0.25 secs.
+  33.8 TEL | [59] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-8.a.sanity.check.telepresence.io")'
+  34.1 TEL | [59] exit 1 in 0.31 secs.
+  34.2 TEL | Wait for vpn-tcp connection: hellotelepresence-9
+  34.2 TEL | [60] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-9")'
+  34.4 TEL | [60] exit 1 in 0.18 secs.
+  34.4 TEL | [61] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-9.a.sanity.check.telepresence.io")'
+  34.7 TEL | [61] exit 1 in 0.30 secs.
+  34.8 TEL | Wait for vpn-tcp connection: hellotelepresence-10
+  34.8 TEL | [62] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-10")'
+  35.0 TEL | [62] exit 1 in 0.18 secs.
+  35.0 TEL | [63] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-10.a.sanity.check.telepresence.io")'
+  35.1 TEL | [63] exit 1 in 0.13 secs.
+  35.2 TEL | Wait for vpn-tcp connection: hellotelepresence-11
+  35.2 TEL | [64] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-11")'
+  35.3 TEL | [64] exit 1 in 0.13 secs.
+  35.3 TEL | [65] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-11.a.sanity.check.telepresence.io")'
+  35.4 TEL | [65] exit 1 in 0.13 secs.
+  35.5  41 | firewall manager: Starting firewall with Python version 3.6.9
+  35.5  41 | firewall manager: ready method name pf.
+  35.5  41 | IPv6 enabled: True
+  35.5  41 | UDP enabled: False
+  35.5  41 | DNS enabled: True
+  35.5  41 | TCP redirector listening on ('::1', 12300, 0, 0).
+  35.5  41 | TCP redirector listening on ('127.0.0.1', 12300).
+  35.5  41 | DNS listening on ('::1', 12300, 0, 0).
+  35.5  41 | DNS listening on ('127.0.0.1', 12300).
+  35.5  41 | Starting client with Python version 3.6.9
+  35.5  41 | c : connecting to server...
+  35.5  22 | Handling connection for 55401
+  35.5 TEL | Wait for vpn-tcp connection: hellotelepresence-12
+  35.5 TEL | [66] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-12")'
+  35.7 TEL | [66] exit 1 in 0.13 secs.
+  35.7  41 | Warning: Permanently added '[127.0.0.1]:55401' (ECDSA) to the list of known hosts.
+  35.7 TEL | [67] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-12.a.sanity.check.telepresence.io")'
+  35.8 TEL | [67] exit 1 in 0.13 secs.
+  35.9 TEL | Wait for vpn-tcp connection: hellotelepresence-13
+  35.9 TEL | [68] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-13")'
+  36.0 TEL | [68] exit 1 in 0.13 secs.
+  36.0 TEL | [69] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-13.a.sanity.check.telepresence.io")'
+  36.0  41 | Starting server with Python version 3.6.8
+  36.0  41 |  s: latency control setting = True
+  36.0  41 |  s: available routes:
+  36.0  41 | c : Connected.
+  36.0  41 | firewall manager: setting up.
+  36.0  41 | >> pfctl -s Interfaces -i lo -v
+  36.1  41 | >> pfctl -s all
+  36.1  41 | >> pfctl -a sshuttle6-12300 -f /dev/stdin
+  36.1  41 | >> pfctl -E
+  36.1  41 | >> pfctl -s Interfaces -i lo -v
+  36.1  41 | >> pfctl -s all
+  36.1  41 | >> pfctl -a sshuttle-12300 -f /dev/stdin
+  36.1  41 | >> pfctl -E
+  36.2 TEL | [69] exit 1 in 0.13 secs.
+  36.3 TEL | Wait for vpn-tcp connection: hellotelepresence-14
+  36.3 TEL | [70] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-14")'
+  36.4  41 | c : DNS request from ('192.168.1.7', 53640) to None: 53 bytes
+  36.4  21 | 2019-11-06T08:17:48+0000 [stdout#info] Set DNS suffix we filter out to: [(b'ant', b'amazon', b'com')]
+  36.4  21 | 2019-11-06T08:17:48+0000 [stdout#info] Result for b'hellotelepresence-14.ant.amazon.com' is ['127.0.0.1']
+  36.4 TEL | [70] captured in 0.13 secs.
+  36.4 TEL | Resolved hellotelepresence-14. 2 more...
+  36.4 TEL | [71] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-14.a.sanity.check.telepresence.io")'
+  36.5  41 | c : DNS request from ('192.168.1.7', 56698) to None: 69 bytes
+  36.5  21 | 2019-11-06T08:17:48+0000 [stdout#info] Sanity check: b'hellotelepresence-14.a.sanity.check.telepresence.io'
+  36.5 TEL | [71] exit 1 in 0.14 secs.
+  36.6 TEL | Wait for vpn-tcp connection: hellotelepresence-15
+  36.6 TEL | [72] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-15")'
+  36.7  41 | c : DNS request from ('192.168.1.7', 55634) to None: 53 bytes
+  36.7  21 | 2019-11-06T08:17:48+0000 [stdout#info] Result for b'hellotelepresence-15.ant.amazon.com' is ['127.0.0.1']
+  36.8 TEL | [72] captured in 0.13 secs.
+  36.8 TEL | Resolved hellotelepresence-15. 1 more...
+  36.8 TEL | [73] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-15.a.sanity.check.telepresence.io")'
+  36.8  41 | c : DNS request from ('192.168.1.7', 50035) to None: 69 bytes
+  36.9  21 | 2019-11-06T08:17:49+0000 [stdout#info] Sanity check: b'hellotelepresence-15.a.sanity.check.telepresence.io'
+  37.0 TEL | [73] exit 1 in 0.19 secs.
+  37.1 TEL | Wait for vpn-tcp connection: hellotelepresence-16
+  37.1 TEL | [74] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-16")'
+  37.1  41 | c : DNS request from ('192.168.1.7', 59504) to None: 53 bytes
+  37.2  21 | 2019-11-06T08:17:49+0000 [stdout#info] Result for b'hellotelepresence-16.ant.amazon.com' is ['127.0.0.1']
+  37.2 TEL | [74] captured in 0.12 secs.
+  37.2 TEL | Resolved hellotelepresence-16. 0 more...
+  37.2 TEL | END SPAN vpn.py:285(connect_sshuttle,sshuttle-wait)    7.2s
+  37.2 TEL | END SPAN vpn.py:262(connect_sshuttle)   15.0s
+  37.2 >>> | Connected. Flushing DNS cache.
+  37.2 TEL | [75] Running: sudo -n /usr/bin/pkill -HUP mDNSResponder
+  37.3  41 | c : DNS request from ('192.168.1.7', 64493) to None: 57 bytes
+  37.3 TEL | [75] ran in 0.10 secs.
+  37.3  41 | c : DNS request from ('192.168.1.7', 57200) to None: 58 bytes
+  37.3  41 | c : DNS request from ('192.168.1.7', 56880) to None: 58 bytes
+  37.3  41 | c : DNS request from ('192.168.1.7', 57700) to None: 47 bytes
+  37.3  41 | c : DNS request from ('192.168.1.7', 61038) to None: 48 bytes
+  37.3  41 | c : DNS request from ('192.168.1.7', 49856) to None: 48 bytes
+  37.3  41 | c : DNS request from ('192.168.1.7', 53630) to None: 43 bytes
+  37.3  41 | c : DNS request from ('192.168.1.7', 61351) to None: 44 bytes
+  37.3  41 | c : DNS request from ('192.168.1.7', 64716) to None: 44 bytes
+  37.3  41 | c : DNS request from ('192.168.1.7', 55525) to None: 23 bytes
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'b._dns-sd._udp.0.1.168.192.in-addr.arpa'
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 15126
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fdb00>
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'db._dns-sd._udp.0.1.168.192.in-addr.arpa'
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 31635
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fde48>
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'lb._dns-sd._udp.0.1.168.192.in-addr.arpa'
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 54321
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2140b8>
+  37.3  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 15126 Closed)
+  37.3  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fdb00>
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] Updated query of type 12 from b'b._dns-sd._udp.ant.amazon.com' to b'b._dns-sd._udp'
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'b._dns-sd._udp'
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 49420
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214198>
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] Updated query of type 12 from b'db._dns-sd._udp.ant.amazon.com' to b'db._dns-sd._udp'
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'db._dns-sd._udp'
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 62024
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214588>
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] Updated query of type 12 from b'lb._dns-sd._udp.ant.amazon.com' to b'lb._dns-sd._udp'
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'lb._dns-sd._udp'
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 62538
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2148d0>
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'b._dns-sd._udp.amazon.com'
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 54384
+  37.3  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214b38>
+  37.3  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 31635 Closed)
+  37.3  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fde48>
+  37.3  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 54321 Closed)
+  37.3  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2140b8>
+  37.3  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'db._dns-sd._udp.amazon.com'
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 8593
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fdc50>
+  37.4  21 | 2019-11-06T08:17:49+0000 [stdout#info] 12 query: b'lb._dns-sd._udp.amazon.com'
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 46539
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214240>
+  37.4  21 | 2019-11-06T08:17:49+0000 [stdout#info] Failed to lookup b'lb._dns-sd._udp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=39237 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('lb._dns-sd._udp', 12, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+  37.4  21 | 2019-11-06T08:17:49+0000 [stdout#info] ], falling back to b'lb._dns-sd._udp.ant.amazon.com'
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 59068
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214e48>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 62538 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2148d0>
+  37.4  21 | 2019-11-06T08:17:49+0000 [stdout#info] Failed to lookup b'b._dns-sd._udp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=32553 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('b._dns-sd._udp', 12, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+  37.4  21 | 2019-11-06T08:17:49+0000 [stdout#info] ], falling back to b'b._dns-sd._udp.ant.amazon.com'
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 17302
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214cc0>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 49420 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214198>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 8593 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fdc50>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 54384 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214b38>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 59068 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214e48>
+  37.4  21 | 2019-11-06T08:17:49+0000 [stdout#info] 6 query: b'local'
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 61632
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fdbe0>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 46539 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214240>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 17302 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214cc0>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 61632 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fdbe0>
+  37.4  21 | 2019-11-06T08:17:49+0000 [stdout#info] Failed to lookup b'db._dns-sd._udp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=44041 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('db._dns-sd._udp', 12, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+  37.4  21 | 2019-11-06T08:17:49+0000 [stdout#info] ], falling back to b'db._dns-sd._udp.ant.amazon.com'
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 55554
+  37.4  21 | 2019-11-06T08:17:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fde48>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 62024 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214588>
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] (UDP Port 55554 Closed)
+  37.4  21 | 2019-11-06T08:17:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1fde48>
+  38.2 TEL | [76] Running: sudo -n echo -n
+  38.3 TEL | [76] ran in 0.07 secs.
+  38.7  41 | c : DNS request from ('192.168.1.7', 56165) to None: 35 bytes
+  38.7  21 | 2019-11-06T08:17:50+0000 [stdout#info] A query: b'tanium.amazon.com'
+  38.8  21 | 2019-11-06T08:17:50+0000 [stdout#info] getaddrinfo error: [Errno -2] Name does not resolve
+  39.3  41 | c : DNS request from ('192.168.1.7', 14721) to None: 28 bytes
+  39.3  21 | 2019-11-06T08:17:51+0000 [stdout#info] A query: b'google.com'
+  39.3  21 | 2019-11-06T08:17:51+0000 [stdout#info] Result for b'google.com' is ['172.217.14.206']
+  41.9 >>> | Setup complete. Launching your command.
+  41.9 TEL | Everything launched. Waiting to exit...
+  41.9 TEL | BEGIN SPAN runner.py:722(wait_for_exit)
+  43.0  41 | c : DNS request from ('192.168.1.7', 62028) to None: 68 bytes
+  43.0  41 | c : DNS request from ('192.168.1.7', 52947) to None: 68 bytes
+  43.0  21 | 2019-11-06T08:17:55+0000 [stdout#info] Updated query of type 33 from b'_ldap._tcp.NA-SFO9._sites.dc._msdcs.ant.amazon.com' to b'_ldap._tcp.NA-SFO9._sites.dc._msdcs'
+  43.0  21 | 2019-11-06T08:17:55+0000 [stdout#info] 33 query: b'_ldap._tcp.NA-SFO9._sites.dc._msdcs'
+  43.0  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 47352
+  43.0  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214f60>
+  43.0  21 | 2019-11-06T08:17:55+0000 [stdout#info] Updated query of type 33 from b'_ldap._tcp.NA-SFO9._sites.gc._msdcs.ant.amazon.com' to b'_ldap._tcp.NA-SFO9._sites.gc._msdcs'
+  43.0  21 | 2019-11-06T08:17:55+0000 [stdout#info] 33 query: b'_ldap._tcp.NA-SFO9._sites.gc._msdcs'
+  43.0  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 51349
+  43.0  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2144e0>
+  43.0  21 | 2019-11-06T08:17:55+0000 [stdout#info] Failed to lookup b'_ldap._tcp.NA-SFO9._sites.dc._msdcs' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=54157 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_ldap._tcp.NA-SFO9._sites.dc._msdcs', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+  43.0  21 | 2019-11-06T08:17:55+0000 [stdout#info] ], falling back to b'_ldap._tcp.NA-SFO9._sites.dc._msdcs.ant.amazon.com'
+  43.0  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 50262
+  43.0  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2149b0>
+  43.0  21 | 2019-11-06T08:17:55+0000 [-] (UDP Port 47352 Closed)
+  43.0  21 | 2019-11-06T08:17:55+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214f60>
+  43.1  21 | 2019-11-06T08:17:55+0000 [-] (UDP Port 50262 Closed)
+  43.1  21 | 2019-11-06T08:17:55+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2149b0>
+  43.1  41 | c : DNS request from ('192.168.1.7', 62883) to None: 43 bytes
+  43.1  21 | 2019-11-06T08:17:55+0000 [stdout#info] Updated query of type 33 from b'_ldap._tcp.ant.amazon.com' to b'_ldap._tcp'
+  43.1  21 | 2019-11-06T08:17:55+0000 [stdout#info] 33 query: b'_ldap._tcp'
+  43.1  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 36329
+  43.1  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2143c8>
+  43.1  21 | 2019-11-06T08:17:55+0000 [stdout#info] Failed to lookup b'_ldap._tcp.NA-SFO9._sites.gc._msdcs' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=42399 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_ldap._tcp.NA-SFO9._sites.gc._msdcs', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+  43.1  21 | 2019-11-06T08:17:55+0000 [stdout#info] ], falling back to b'_ldap._tcp.NA-SFO9._sites.gc._msdcs.ant.amazon.com'
+  43.1  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 28476
+  43.1  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2147b8>
+  43.1  21 | 2019-11-06T08:17:55+0000 [-] (UDP Port 51349 Closed)
+  43.1  21 | 2019-11-06T08:17:55+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2144e0>
+  43.1  21 | 2019-11-06T08:17:55+0000 [stdout#info] Failed to lookup b'_ldap._tcp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=38333 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_ldap._tcp', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+  43.1  21 | 2019-11-06T08:17:55+0000 [stdout#info] ], falling back to b'_ldap._tcp.ant.amazon.com'
+  43.1  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 54008
+  43.1  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214ef0>
+  43.1  21 | 2019-11-06T08:17:55+0000 [-] (UDP Port 36329 Closed)
+  43.1  21 | 2019-11-06T08:17:55+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2143c8>
+  43.1  21 | 2019-11-06T08:17:55+0000 [-] (UDP Port 54008 Closed)
+  43.1  21 | 2019-11-06T08:17:55+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214ef0>
+  43.2  41 | c : DNS request from ('192.168.1.7', 54344) to None: 41 bytes
+  43.2  21 | 2019-11-06T08:17:55+0000 [-] (UDP Port 28476 Closed)
+  43.2  21 | 2019-11-06T08:17:55+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b2147b8>
+  43.2  21 | 2019-11-06T08:17:55+0000 [stdout#info] Updated query of type 33 from b'_gc._tcp.ant.amazon.com' to b'_gc._tcp'
+  43.2  21 | 2019-11-06T08:17:55+0000 [stdout#info] 33 query: b'_gc._tcp'
+  43.2  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 39287
+  43.2  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214cc0>
+  43.2  21 | 2019-11-06T08:17:55+0000 [stdout#info] Failed to lookup b'_gc._tcp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=32767 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_gc._tcp', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+  43.2  21 | 2019-11-06T08:17:55+0000 [stdout#info] ], falling back to b'_gc._tcp.ant.amazon.com'
+  43.2  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 45398
+  43.2  21 | 2019-11-06T08:17:55+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214320>
+  43.2  21 | 2019-11-06T08:17:55+0000 [-] (UDP Port 39287 Closed)
+  43.2  21 | 2019-11-06T08:17:55+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214cc0>
+  43.2  21 | 2019-11-06T08:17:55+0000 [-] (UDP Port 45398 Closed)
+  43.2  21 | 2019-11-06T08:17:55+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214320>
+  43.8  41 | c : DNS request from ('192.168.1.7', 64235) to None: 34 bytes
+  43.9  21 | 2019-11-06T08:17:56+0000 [stdout#info] A query: b'gs-loc.apple.com'
+  43.9  21 | 2019-11-06T08:17:56+0000 [stdout#info] Result for b'gs-loc.apple.com' is ['17.142.171.8', '17.142.171.9']
+  44.3  41 | c : DNS request from ('192.168.1.7', 63100) to None: 53 bytes
+  44.4  21 | 2019-11-06T08:17:56+0000 [stdout#info] A query: b'product.ecommerce.svc.cluster.local'
+  44.4  21 | 2019-11-06T08:17:56+0000 [stdout#info] Result for b'product.ecommerce.svc.cluster.local' is ['172.20.252.145']
+  44.4  41 | c : Accept TCP: 192.168.1.7:55460 -> 172.20.252.145:80.
+  44.4  41 | c : Accept TCP: 192.168.1.7:55461 -> 172.20.252.145:80.
+  44.7  41 | c : DNS request from ('192.168.1.7', 60813) to None: 23 bytes
+  44.7  21 | 2019-11-06T08:17:56+0000 [stdout#info] 6 query: b'local'
+  44.7  21 | 2019-11-06T08:17:56+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 34140
+  44.7  21 | 2019-11-06T08:17:56+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214390>
+  44.7  21 | 2019-11-06T08:17:56+0000 [-] (UDP Port 34140 Closed)
+  44.7  21 | 2019-11-06T08:17:56+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214390>
+  44.8  41 | c : DNS request from ('192.168.1.7', 52579) to None: 23 bytes
+  44.8  41 | c : DNS request from ('192.168.1.7', 56844) to None: 23 bytes
+  44.8  21 | 2019-11-06T08:17:56+0000 [stdout#info] 6 query: b'local'
+  44.8  21 | 2019-11-06T08:17:56+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 6178
+  44.8  21 | 2019-11-06T08:17:56+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214b70>
+  44.8  21 | 2019-11-06T08:17:56+0000 [-] (UDP Port 6178 Closed)
+  44.8  21 | 2019-11-06T08:17:56+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214b70>
+  44.8  21 | 2019-11-06T08:17:57+0000 [stdout#info] 6 query: b'local'
+  44.8  21 | 2019-11-06T08:17:57+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 50226
+  44.8  21 | 2019-11-06T08:17:57+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214390>
+  44.8  21 | 2019-11-06T08:17:57+0000 [-] (UDP Port 50226 Closed)
+  44.8  21 | 2019-11-06T08:17:57+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b214390>
+  45.0  41 | c : DNS request from ('192.168.1.7', 36419) to None: 34 bytes
+  45.0  21 | 2019-11-06T08:17:57+0000 [stdout#info] A query: b'tools.vkitty.org'
+  45.1  21 | 2019-11-06T08:17:57+0000 [stdout#info] Result for b'tools.vkitty.org' is ['78.41.204.38']
+  46.6  41 | c : DNS request from ('192.168.1.7', 23647) to None: 32 bytes
+  46.6  21 | 2019-11-06T08:17:58+0000 [stdout#info] A query: b'www.google.com'
+  46.6  21 | 2019-11-06T08:17:58+0000 [stdout#info] Result for b'www.google.com' is ['172.217.14.196']
+  47.8  41 | c : DNS request from ('192.168.1.7', 62127) to None: 47 bytes
+  47.9  21 | 2019-11-06T08:18:00+0000 [stdout#info] A query: b'us-west-2.queue.amazonaws.com'
+  47.9  21 | 2019-11-06T08:18:00+0000 [stdout#info] Result for b'us-west-2.queue.amazonaws.com' is ['52.94.208.205']
+  48.4  41 | c : DNS request from ('192.168.1.7', 57968) to None: 52 bytes
+  48.5  21 | 2019-11-06T08:18:00+0000 [stdout#info] A query: b'person.ecommerce.svc.cluster.local'
+  48.5  21 | 2019-11-06T08:18:00+0000 [stdout#info] Result for b'person.ecommerce.svc.cluster.local' is ['172.20.191.35']
+  48.5  41 | c : Accept TCP: 192.168.1.7:55465 -> 172.20.191.35:80.
+  48.5  41 | c : Accept TCP: 192.168.1.7:55466 -> 172.20.191.35:80.
+  48.6 TEL | (proxy checking local liveness)
+  48.6  21 | 2019-11-06T08:18:00+0000 [Poll#info] Checkpoint
+  49.4  41 | c : DNS request from ('192.168.1.7', 57455) to None: 23 bytes
+  49.5  21 | 2019-11-06T08:18:01+0000 [stdout#info] 6 query: b'local'
+  49.5  21 | 2019-11-06T08:18:01+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 63014
+  49.5  21 | 2019-11-06T08:18:01+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198be0>
+  49.5  21 | 2019-11-06T08:18:01+0000 [-] (UDP Port 63014 Closed)
+  49.5  21 | 2019-11-06T08:18:01+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198be0>
+  52.9  41 | c : DNS request from ('192.168.1.7', 65018) to None: 52 bytes
+  53.0  21 | 2019-11-06T08:18:05+0000 [stdout#info] A query: b'review.ecommerce.svc.cluster.local'
+  53.0  21 | 2019-11-06T08:18:05+0000 [stdout#info] Result for b'review.ecommerce.svc.cluster.local' is ['172.20.219.201']
+  53.0  41 | c : Accept TCP: 192.168.1.7:55468 -> 172.20.219.201:80.
+  53.0  41 | c : Accept TCP: 192.168.1.7:55469 -> 172.20.219.201:80.
+  57.3  41 | c : DNS request from ('192.168.1.7', 60813) to None: 60 bytes
+  57.4  21 | 2019-11-06T08:18:09+0000 [stdout#info] A query: b'recommendation.ecommerce.svc.cluster.local'
+  57.4  21 | 2019-11-06T08:18:09+0000 [stdout#info] Result for b'recommendation.ecommerce.svc.cluster.local' is ['172.20.47.37']
+  57.4  41 | c : Accept TCP: 192.168.1.7:55471 -> 172.20.47.37:80.
+  57.4  41 | c : Accept TCP: 192.168.1.7:55472 -> 172.20.47.37:80.
+  61.4  41 | c : Accept TCP: 192.168.1.7:55473 -> 172.20.252.145:80.
+  61.5  41 |  s: SW'unknown':Mux#25: deleting (17 remain)
+  61.5  41 |  s: SW#8:172.20.252.145:80: deleting (16 remain)
+  61.5  41 | c : DNS request from ('192.168.1.7', 61766) to None: 33 bytes
+  61.6  21 | 2019-11-06T08:18:13+0000 [stdout#info] A query: b'ssl.gstatic.com'
+  61.6  21 | 2019-11-06T08:18:13+0000 [stdout#info] Result for b'ssl.gstatic.com' is ['216.58.217.35']
+  61.9  41 | c : DNS request from ('192.168.1.7', 2620) to None: 33 bytes
+  62.0  21 | 2019-11-06T08:18:14+0000 [stdout#info] A query: b'docs.google.com'
+  62.0  21 | 2019-11-06T08:18:14+0000 [stdout#info] Result for b'docs.google.com' is ['172.217.3.206']
+  68.3 TEL | [77] Running: sudo -n echo -n
+  68.4 TEL | [77] ran in 0.04 secs.
+  76.9  41 | c : DNS request from ('192.168.1.7', 61715) to None: 66 bytes
+  76.9  21 | 2019-11-06T08:18:29+0000 [stdout#info] A query: b'mongo-mongodb-replicaset.mongo.svc.cluster.local'
+  76.9  21 | 2019-11-06T08:18:29+0000 [stdout#info] getaddrinfo error: [Errno -2] Name does not resolve
+  76.9  41 | c : SW#13:192.168.1.7:55461: deleting (17 remain)
+  76.9  41 | c : SW'unknown':Mux#25: deleting (16 remain)
+  78.6 TEL | (proxy checking local liveness)
+  78.6  21 | 2019-11-06T08:18:30+0000 [Poll#info] Checkpoint
+  84.9  41 | c : DNS request from ('192.168.1.7', 50301) to None: 49 bytes
+  84.9  21 | 2019-11-06T08:18:37+0000 [stdout#info] A query: b'mongodb.mongo.svc.cluster.local'
+  84.9  21 | 2019-11-06T08:18:37+0000 [stdout#info] Result for b'mongodb.mongo.svc.cluster.local' is ['172.20.41.59']
+  84.9  41 | c : Accept TCP: 192.168.1.7:55478 -> 172.20.41.59:27017.
+  85.0  41 |  s: SW'unknown':Mux#34: deleting (17 remain)
+  85.0  41 |  s: SW#16:172.20.191.35:80: deleting (16 remain)
+  85.0  41 | c : SW'unknown':Mux#34: deleting (17 remain)
+  85.0  41 | c : SW#15:192.168.1.7:55466: deleting (16 remain)
+  85.1  41 | c : Accept TCP: 192.168.1.7:55479 -> 172.20.41.59:27017.
+  90.6  41 | c : DNS request from ('192.168.1.7', 64235) to None: 23 bytes
+  90.7  21 | 2019-11-06T08:18:42+0000 [stdout#info] 6 query: b'local'
+  90.7  21 | 2019-11-06T08:18:42+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 56087
+  90.7  21 | 2019-11-06T08:18:42+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a87f0>
+  90.7  21 | 2019-11-06T08:18:42+0000 [-] (UDP Port 56087 Closed)
+  90.7  21 | 2019-11-06T08:18:42+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a87f0>
+  90.8  41 | c : DNS request from ('192.168.1.7', 53879) to None: 23 bytes
+  90.9  21 | 2019-11-06T08:18:43+0000 [stdout#info] 6 query: b'local'
+  90.9  21 | 2019-11-06T08:18:43+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 43697
+  90.9  21 | 2019-11-06T08:18:43+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8390>
+  90.9  21 | 2019-11-06T08:18:43+0000 [-] (UDP Port 43697 Closed)
+  90.9  21 | 2019-11-06T08:18:43+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8390>
+  93.9  41 | c : DNS request from ('192.168.1.7', 54441) to None: 43 bytes
+  93.9  21 | 2019-11-06T08:18:46+0000 [stdout#info] A query: b'vortex.data.microsoft.com'
+  94.0  21 | 2019-11-06T08:18:46+0000 [stdout#info] Result for b'vortex.data.microsoft.com' is ['64.4.54.254']
+  97.3  41 | c : DNS request from ('192.168.1.7', 52477) to None: 23 bytes
+  97.4  21 | 2019-11-06T08:18:49+0000 [stdout#info] 6 query: b'local'
+  97.4  21 | 2019-11-06T08:18:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 2050
+  97.4  21 | 2019-11-06T08:18:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8860>
+  97.4  21 | 2019-11-06T08:18:49+0000 [-] (UDP Port 2050 Closed)
+  97.4  21 | 2019-11-06T08:18:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8860>
+  97.7  41 | c : DNS request from ('192.168.1.7', 61038) to None: 48 bytes
+  97.7  21 | 2019-11-06T08:18:49+0000 [stdout#info] Updated query of type 12 from b'db._dns-sd._udp.ant.amazon.com' to b'db._dns-sd._udp'
+  97.7  21 | 2019-11-06T08:18:49+0000 [stdout#info] 12 query: b'db._dns-sd._udp'
+  97.7  21 | 2019-11-06T08:18:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 52878
+  97.7  21 | 2019-11-06T08:18:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8710>
+  97.7  21 | 2019-11-06T08:18:49+0000 [stdout#info] Failed to lookup b'db._dns-sd._udp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=14149 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('db._dns-sd._udp', 12, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+  97.7  21 | 2019-11-06T08:18:49+0000 [stdout#info] ], falling back to b'db._dns-sd._udp.ant.amazon.com'
+  97.7  21 | 2019-11-06T08:18:49+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 5789
+  97.7  21 | 2019-11-06T08:18:49+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8a58>
+  97.7  21 | 2019-11-06T08:18:49+0000 [-] (UDP Port 52878 Closed)
+  97.7  21 | 2019-11-06T08:18:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8710>
+  97.7  21 | 2019-11-06T08:18:49+0000 [-] (UDP Port 5789 Closed)
+  97.7  21 | 2019-11-06T08:18:49+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8a58>
+  98.5 TEL | [78] Running: sudo -n echo -n
+  98.5 TEL | [78] ran in 0.06 secs.
+  99.5  41 | c : DNS request from ('192.168.1.7', 64696) to None: 48 bytes
+  99.5  41 | c : DNS request from ('192.168.1.7', 60534) to None: 48 bytes
+  99.5  21 | 2019-11-06T08:18:51+0000 [stdout#info] A query: b'zocalo.us-west-2.amazonaws.com'
+  99.5  21 | 2019-11-06T08:18:51+0000 [stdout#info] AAAA query, sending back A instead: b'zocalo.us-west-2.amazonaws.com'
+  99.5  21 | 2019-11-06T08:18:51+0000 [stdout#info] A query: b'zocalo.us-west-2.amazonaws.com'
+  99.6  21 | 2019-11-06T08:18:51+0000 [stdout#info] Result for b'zocalo.us-west-2.amazonaws.com' is ['54.240.251.127']
+  99.6  21 | 2019-11-06T08:18:51+0000 [stdout#info] Result for b'zocalo.us-west-2.amazonaws.com' is ['54.240.249.131']
+ 101.1  41 | c : DNS request from ('192.168.1.7', 64493) to None: 57 bytes
+ 101.1  41 | c : DNS request from ('192.168.1.7', 57200) to None: 58 bytes
+ 101.1  41 | c : DNS request from ('192.168.1.7', 56880) to None: 58 bytes
+ 101.1  41 | c : DNS request from ('192.168.1.7', 57700) to None: 47 bytes
+ 101.1  41 | c : DNS request from ('192.168.1.7', 49856) to None: 48 bytes
+ 101.1  41 | c : DNS request from ('192.168.1.7', 53630) to None: 43 bytes
+ 101.1  41 | c : DNS request from ('192.168.1.7', 61351) to None: 44 bytes
+ 101.1  41 | c : DNS request from ('192.168.1.7', 64716) to None: 44 bytes
+ 101.1  21 | 2019-11-06T08:18:53+0000 [stdout#info] 12 query: b'b._dns-sd._udp.0.1.168.192.in-addr.arpa'
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 29292
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8ac8>
+ 101.1  21 | 2019-11-06T08:18:53+0000 [stdout#info] 12 query: b'db._dns-sd._udp.0.1.168.192.in-addr.arpa'
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 47944
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8be0>
+ 101.1  21 | 2019-11-06T08:18:53+0000 [stdout#info] 12 query: b'lb._dns-sd._udp.0.1.168.192.in-addr.arpa'
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 36284
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8dd8>
+ 101.1  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 29292 Closed)
+ 101.1  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8ac8>
+ 101.1  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 47944 Closed)
+ 101.1  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8be0>
+ 101.1  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 36284 Closed)
+ 101.1  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8dd8>
+ 101.1  21 | 2019-11-06T08:18:53+0000 [stdout#info] Updated query of type 12 from b'b._dns-sd._udp.ant.amazon.com' to b'b._dns-sd._udp'
+ 101.1  21 | 2019-11-06T08:18:53+0000 [stdout#info] 12 query: b'b._dns-sd._udp'
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 47761
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8ef0>
+ 101.1  21 | 2019-11-06T08:18:53+0000 [stdout#info] Updated query of type 12 from b'lb._dns-sd._udp.ant.amazon.com' to b'lb._dns-sd._udp'
+ 101.1  21 | 2019-11-06T08:18:53+0000 [stdout#info] 12 query: b'lb._dns-sd._udp'
+ 101.1  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 42338
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a82b0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [stdout#info] 12 query: b'b._dns-sd._udp.amazon.com'
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 36423
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a80f0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [stdout#info] 12 query: b'db._dns-sd._udp.amazon.com'
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 64268
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198da0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 36423 Closed)
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a80f0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [stdout#info] 12 query: b'lb._dns-sd._udp.amazon.com'
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 4463
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198048>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 64268 Closed)
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198da0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [stdout#info] Failed to lookup b'lb._dns-sd._udp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=58606 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('lb._dns-sd._udp', 12, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [stdout#info] ], falling back to b'lb._dns-sd._udp.ant.amazon.com'
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 61299
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198cc0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 42338 Closed)
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a82b0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 4463 Closed)
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198048>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 61299 Closed)
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198cc0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [stdout#info] Failed to lookup b'b._dns-sd._udp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=47878 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('b._dns-sd._udp', 12, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [stdout#info] ], falling back to b'b._dns-sd._udp.ant.amazon.com'
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 51325
+ 101.2  21 | 2019-11-06T08:18:53+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198eb8>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 47761 Closed)
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8ef0>
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] (UDP Port 51325 Closed)
+ 101.2  21 | 2019-11-06T08:18:53+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198eb8>
+ 104.7  41 | c : DNS request from ('192.168.1.7', 54307) to None: 23 bytes
+ 104.8  21 | 2019-11-06T08:18:56+0000 [stdout#info] 6 query: b'local'
+ 104.8  21 | 2019-11-06T08:18:56+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 21225
+ 104.8  21 | 2019-11-06T08:18:56+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198c50>
+ 104.8  21 | 2019-11-06T08:18:56+0000 [-] (UDP Port 21225 Closed)
+ 104.8  21 | 2019-11-06T08:18:56+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198c50>
+ 104.8  41 | c : DNS request from ('192.168.1.7', 63083) to None: 23 bytes
+ 104.8  41 | c : DNS request from ('192.168.1.7', 52925) to None: 23 bytes
+ 104.8  21 | 2019-11-06T08:18:57+0000 [stdout#info] 6 query: b'local'
+ 104.8  21 | 2019-11-06T08:18:57+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 30567
+ 104.8  21 | 2019-11-06T08:18:57+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198ef0>
+ 104.8  21 | 2019-11-06T08:18:57+0000 [-] (UDP Port 30567 Closed)
+ 104.8  21 | 2019-11-06T08:18:57+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198ef0>
+ 104.9  21 | 2019-11-06T08:18:57+0000 [stdout#info] 6 query: b'local'
+ 104.9  21 | 2019-11-06T08:18:57+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 45036
+ 104.9  21 | 2019-11-06T08:18:57+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198048>
+ 104.9  21 | 2019-11-06T08:18:57+0000 [-] (UDP Port 45036 Closed)
+ 104.9  21 | 2019-11-06T08:18:57+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b198048>
+ 108.6 TEL | (proxy checking local liveness)
+ 108.6  21 | 2019-11-06T08:19:00+0000 [Poll#info] Checkpoint
+ 109.5  41 | c : DNS request from ('192.168.1.7', 61681) to None: 23 bytes
+ 109.5  21 | 2019-11-06T08:19:01+0000 [stdout#info] 6 query: b'local'
+ 109.5  21 | 2019-11-06T08:19:01+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 4592
+ 109.5  21 | 2019-11-06T08:19:01+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8da0>
+ 109.5  21 | 2019-11-06T08:19:01+0000 [-] (UDP Port 4592 Closed)
+ 109.5  21 | 2019-11-06T08:19:01+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8da0>
+ 110.5  41 | c : DNS request from ('192.168.1.7', 65175) to None: 43 bytes
+ 110.5  21 | 2019-11-06T08:19:02+0000 [stdout#info] A query: b'vortex.data.microsoft.com'
+ 110.5  21 | 2019-11-06T08:19:02+0000 [stdout#info] Result for b'vortex.data.microsoft.com' is ['64.4.54.254']
+ 119.5  41 | c : DNS request from ('192.168.1.7', 57371) to None: 23 bytes
+ 119.5  21 | 2019-11-06T08:19:11+0000 [stdout#info] 6 query: b'local'
+ 119.5  21 | 2019-11-06T08:19:11+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 40440
+ 119.5  21 | 2019-11-06T08:19:11+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8f28>
+ 119.5  21 | 2019-11-06T08:19:11+0000 [-] (UDP Port 40440 Closed)
+ 119.5  21 | 2019-11-06T08:19:11+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8f28>
+ 120.4  41 | c : DNS request from ('192.168.1.7', 62994) to None: 47 bytes
+ 120.4  21 | 2019-11-06T08:19:12+0000 [stdout#info] A query: b'us-west-2.queue.amazonaws.com'
+ 120.4  21 | 2019-11-06T08:19:12+0000 [stdout#info] Result for b'us-west-2.queue.amazonaws.com' is ['52.119.165.100']
+ 126.0  41 | c : DNS request from ('192.168.1.7', 49429) to None: 43 bytes
+ 126.1  21 | 2019-11-06T08:19:18+0000 [stdout#info] A query: b'vortex.data.microsoft.com'
+ 126.1  21 | 2019-11-06T08:19:18+0000 [stdout#info] Result for b'vortex.data.microsoft.com' is ['64.4.54.254']
+ 128.4  41 | c : DNS request from ('192.168.1.7', 60314) to None: 58 bytes
+ 128.4  21 | 2019-11-06T08:19:20+0000 [stdout#info] A query: b'cognito-identity.us-east-1.amazonaws.com'
+ 128.4  21 | 2019-11-06T08:19:20+0000 [stdout#info] Result for b'cognito-identity.us-east-1.amazonaws.com' is ['54.236.65.18', '54.236.102.25', '18.235.106.42', '52.4.100.27', '52.202.109.90', '107.23.60.98', '54.209.22.203', '18.211.194.171']
+ 128.6 TEL | [79] Running: sudo -n echo -n
+ 128.7 TEL | [79] ran in 0.08 secs.
+ 133.2  41 | c : DNS request from ('192.168.1.7', 51203) to None: 68 bytes
+ 133.2  21 | 2019-11-06T08:19:25+0000 [stdout#info] Updated query of type 33 from b'_ldap._tcp.NA-SFO9._sites.dc._msdcs.ant.amazon.com' to b'_ldap._tcp.NA-SFO9._sites.dc._msdcs'
+ 133.2  21 | 2019-11-06T08:19:25+0000 [stdout#info] 33 query: b'_ldap._tcp.NA-SFO9._sites.dc._msdcs'
+ 133.2  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 50016
+ 133.2  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8550>
+ 133.2  21 | 2019-11-06T08:19:25+0000 [stdout#info] Failed to lookup b'_ldap._tcp.NA-SFO9._sites.dc._msdcs' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=25540 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_ldap._tcp.NA-SFO9._sites.dc._msdcs', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+ 133.2  21 | 2019-11-06T08:19:25+0000 [stdout#info] ], falling back to b'_ldap._tcp.NA-SFO9._sites.dc._msdcs.ant.amazon.com'
+ 133.2  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 42898
+ 133.2  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8320>
+ 133.2  21 | 2019-11-06T08:19:25+0000 [-] (UDP Port 50016 Closed)
+ 133.2  21 | 2019-11-06T08:19:25+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8550>
+ 133.2  41 | c : DNS request from ('192.168.1.7', 54694) to None: 68 bytes
+ 133.2  21 | 2019-11-06T08:19:25+0000 [-] (UDP Port 42898 Closed)
+ 133.2  21 | 2019-11-06T08:19:25+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8320>
+ 133.2  41 | c : DNS request from ('192.168.1.7', 59167) to None: 43 bytes
+ 133.3  21 | 2019-11-06T08:19:25+0000 [stdout#info] Updated query of type 33 from b'_ldap._tcp.NA-SFO9._sites.gc._msdcs.ant.amazon.com' to b'_ldap._tcp.NA-SFO9._sites.gc._msdcs'
+ 133.3  21 | 2019-11-06T08:19:25+0000 [stdout#info] 33 query: b'_ldap._tcp.NA-SFO9._sites.gc._msdcs'
+ 133.3  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 24907
+ 133.3  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a82b0>
+ 133.3  21 | 2019-11-06T08:19:25+0000 [stdout#info] Failed to lookup b'_ldap._tcp.NA-SFO9._sites.gc._msdcs' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=59846 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_ldap._tcp.NA-SFO9._sites.gc._msdcs', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+ 133.3  21 | 2019-11-06T08:19:25+0000 [stdout#info] ], falling back to b'_ldap._tcp.NA-SFO9._sites.gc._msdcs.ant.amazon.com'
+ 133.3  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 9019
+ 133.3  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8f28>
+ 133.3  21 | 2019-11-06T08:19:25+0000 [-] (UDP Port 24907 Closed)
+ 133.3  21 | 2019-11-06T08:19:25+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a82b0>
+ 133.3  21 | 2019-11-06T08:19:25+0000 [-] (UDP Port 9019 Closed)
+ 133.3  21 | 2019-11-06T08:19:25+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8f28>
+ 133.3  21 | 2019-11-06T08:19:25+0000 [stdout#info] Updated query of type 33 from b'_ldap._tcp.ant.amazon.com' to b'_ldap._tcp'
+ 133.3  21 | 2019-11-06T08:19:25+0000 [stdout#info] 33 query: b'_ldap._tcp'
+ 133.3  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 8652
+ 133.3  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8780>
+ 133.3  41 | c : DNS request from ('192.168.1.7', 52623) to None: 41 bytes
+ 133.3  21 | 2019-11-06T08:19:25+0000 [stdout#info] Failed to lookup b'_ldap._tcp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=7934 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_ldap._tcp', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+ 133.3  21 | 2019-11-06T08:19:25+0000 [stdout#info] ], falling back to b'_ldap._tcp.ant.amazon.com'
+ 133.3  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 25330
+ 133.3  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1af0f0>
+ 133.3  21 | 2019-11-06T08:19:25+0000 [-] (UDP Port 8652 Closed)
+ 133.3  21 | 2019-11-06T08:19:25+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8780>
+ 133.4  21 | 2019-11-06T08:19:25+0000 [stdout#info] Updated query of type 33 from b'_gc._tcp.ant.amazon.com' to b'_gc._tcp'
+ 133.4  21 | 2019-11-06T08:19:25+0000 [stdout#info] 33 query: b'_gc._tcp'
+ 133.4  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 62405
+ 133.4  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8dd8>
+ 133.4  21 | 2019-11-06T08:19:25+0000 [-] (UDP Port 25330 Closed)
+ 133.4  21 | 2019-11-06T08:19:25+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1af0f0>
+ 133.4  21 | 2019-11-06T08:19:25+0000 [stdout#info] Failed to lookup b'_gc._tcp' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=62387 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_gc._tcp', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+ 133.4  21 | 2019-11-06T08:19:25+0000 [stdout#info] ], falling back to b'_gc._tcp.ant.amazon.com'
+ 133.4  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 37646
+ 133.4  21 | 2019-11-06T08:19:25+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1af1d0>
+ 133.4  21 | 2019-11-06T08:19:25+0000 [-] (UDP Port 62405 Closed)
+ 133.4  21 | 2019-11-06T08:19:25+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1a8dd8>
+ 133.4  21 | 2019-11-06T08:19:25+0000 [-] (UDP Port 37646 Closed)
+ 133.4  21 | 2019-11-06T08:19:25+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1af1d0>
+ 136.5  41 | c : DNS request from ('192.168.1.7', 60039) to None: 82 bytes
+ 136.5  41 | c : DNS request from ('192.168.1.7', 57120) to None: 82 bytes
+ 136.6  21 | 2019-11-06T08:19:28+0000 [stdout#info] A query: b'A325C5D730776886B8F4E947A89B1A1E.sk1.us-west-2.eks.amazonaws.com'
+ 136.6  21 | 2019-11-06T08:19:28+0000 [stdout#info] AAAA query, sending back A instead: b'A325C5D730776886B8F4E947A89B1A1E.sk1.us-west-2.eks.amazonaws.com'
+ 136.6  21 | 2019-11-06T08:19:28+0000 [stdout#info] A query: b'A325C5D730776886B8F4E947A89B1A1E.sk1.us-west-2.eks.amazonaws.com'
+ 136.6  21 | 2019-11-06T08:19:28+0000 [stdout#info] Result for b'A325C5D730776886B8F4E947A89B1A1E.sk1.us-west-2.eks.amazonaws.com' is ['35.161.235.238', '34.214.248.14']
+ 136.6  21 | 2019-11-06T08:19:28+0000 [stdout#info] Result for b'A325C5D730776886B8F4E947A89B1A1E.sk1.us-west-2.eks.amazonaws.com' is ['35.161.235.238', '34.214.248.14']
+ 138.6 TEL | (proxy checking local liveness)
+ 138.6  21 | 2019-11-06T08:19:30+0000 [Poll#info] Checkpoint
+ 142.4  41 | c : DNS request from ('192.168.1.7', 59132) to None: 43 bytes
+ 142.4  21 | 2019-11-06T08:19:34+0000 [stdout#info] A query: b'vortex.data.microsoft.com'
+ 142.4  21 | 2019-11-06T08:19:34+0000 [stdout#info] Result for b'vortex.data.microsoft.com' is ['64.4.54.254']
+ 145.9  41 | c : DNS request from ('192.168.1.7', 49331) to None: 48 bytes
+ 145.9  21 | 2019-11-06T08:19:38+0000 [stdout#info] A query: b'karl-registrar.amazon-corp.com'
+ 146.1  21 | 2019-11-06T08:19:38+0000 [stdout#info] Result for b'karl-registrar.amazon-corp.com' is ['52.94.210.117']
+ 156.9  41 | c : DNS request from ('192.168.1.7', 50630) to None: 66 bytes
+ 156.9  21 | 2019-11-06T08:19:49+0000 [stdout#info] A query: b'mongo-mongodb-replicaset.mongo.svc.cluster.local'
+ 156.9  21 | 2019-11-06T08:19:49+0000 [stdout#info] getaddrinfo error: [Errno -2] Name does not resolve
+ 158.8 TEL | [80] Running: sudo -n echo -n
+ 158.8 TEL | [80] ran in 0.05 secs.
+ 160.2  41 | c : DNS request from ('192.168.1.7', 52566) to None: 43 bytes
+ 160.2  21 | 2019-11-06T08:19:52+0000 [stdout#info] A query: b'vortex.data.microsoft.com'
+ 160.3  21 | 2019-11-06T08:19:52+0000 [stdout#info] Result for b'vortex.data.microsoft.com' is ['64.4.54.254']
+ 161.4  41 | c : DNS request from ('192.168.1.7', 64694) to None: 35 bytes
+ 161.4  21 | 2019-11-06T08:19:53+0000 [stdout#info] A query: b'tanium.amazon.com'
+ 161.4  21 | 2019-11-06T08:19:53+0000 [stdout#info] getaddrinfo error: [Errno -2] Name does not resolve
+ 165.2  41 | c : DNS request from ('192.168.1.7', 53597) to None: 65 bytes
+ 165.3  21 | 2019-11-06T08:19:57+0000 [stdout#info] Updated query of type 33 from b'_ldap._tcp.pdc._msdcs.ant.amazon.com' to b'_ldap._tcp.pdc._msdcs'
+ 165.3  21 | 2019-11-06T08:19:57+0000 [stdout#info] 33 query: b'_ldap._tcp.pdc._msdcs'
+ 165.3  21 | 2019-11-06T08:19:57+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 5924
+ 165.3  21 | 2019-11-06T08:19:57+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1b02e8>
+ 165.3  21 | 2019-11-06T08:19:57+0000 [stdout#info] Failed to lookup b'_ldap._tcp.pdc._msdcs' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=63557 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_ldap._tcp.pdc._msdcs', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+ 165.3  21 | 2019-11-06T08:19:57+0000 [stdout#info] ], falling back to b'_ldap._tcp.pdc._msdcs.ant.amazon.com'
+ 165.3  21 | 2019-11-06T08:19:57+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 4454
+ 165.3  21 | 2019-11-06T08:19:57+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1b06d8>
+ 165.3  21 | 2019-11-06T08:19:57+0000 [-] (UDP Port 5924 Closed)
+ 165.3  21 | 2019-11-06T08:19:57+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1b02e8>
+ 165.4  21 | 2019-11-06T08:19:57+0000 [-] (UDP Port 4454 Closed)
+ 165.4  21 | 2019-11-06T08:19:57+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1b06d8>
+ 177.6 TEL | [27] SSH port forward (socks and proxy poll): exit 255
+ 177.6 TEL | END SPAN runner.py:722(wait_for_exit)  135.7s
+ 177.6 >>> | 
+ 177.6 >>> | Background process (SSH port forward (socks and proxy poll)) exited with return code 255. Command was:
+ 177.6 >>> |   ssh -N -oServerAliveInterval=1 -oServerAliveCountMax=10 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -q -p 55401 telepresence@127.0.0.1 -L127.0.0.1:55413:127.0.0.1:9050 -R9055:127.0.0.1:55414
+ 177.6 >>> | 
+ 177.6 >>> | 
+ 177.6 >>> | Proxy to Kubernetes exited. This is typically due to a lost connection.
+ 177.6 >>> | 
+ 177.6 TEL | EXITING with status code 255
+ 177.6 >>> | Exit cleanup in progress
+ 177.6 TEL | (Cleanup) Terminate local process
+ 177.6 TEL | Killing local process...
+ 178.6 TEL | Main process (bash --norc)
+ 178.6 TEL | (Cleanup) Kill BG process [41] sshuttle
+ 178.6 TEL |  exited with code -9.
+ 178.6  41 | >> pfctl -a sshuttle6-12300 -F all
+ 178.6 TEL | (Cleanup) Unmount remote filesystem
+ 178.6 TEL | [81] Running: umount -f /tmp/tel-yqg48enx/fs
+ 178.6  41 | >> pfctl -X 11815575273522015131
+ 178.6  41 | firewall manager: Error trying to undo IPv6 firewall.
+ 178.6  41 | ---> Traceback (most recent call last):
+ 178.6  41 | --->   File "/Users/prabhsha/.pex/install/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl.73b9c6a0c49d6b6bf7533478d454b7be51b9d990/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/firewall.py", line 249, in main
+ 178.6  41 | --->     method.restore_firewall(port_v6, socket.AF_INET6, udp)
+ 178.6  41 | --->   File "/Users/prabhsha/.pex/install/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl.73b9c6a0c49d6b6bf7533478d454b7be51b9d990/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/methods/pf.py", line 457, in restore_firewall
+ 178.6  41 | --->     pf.disable(pf_get_anchor(family, port))
+ 178.6  41 | --->   File "/Users/prabhsha/.pex/install/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl.73b9c6a0c49d6b6bf7533478d454b7be51b9d990/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/methods/pf.py", line 326, in disable
+ 178.6  41 | --->     pfctl('-X %s' % _pf_context['Xtoken'].pop().decode("ASCII"))
+ 178.6  41 | --->   File "/Users/prabhsha/.pex/install/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl.73b9c6a0c49d6b6bf7533478d454b7be51b9d990/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/methods/pf.py", line 376, in pfctl
+ 178.6  41 | --->     raise Fatal('%r returned %d' % (argv, p.returncode))
+ 178.6  41 | ---> sshuttle.helpers.Fatal: ['pfctl', '-X', '11815575273522015131'] returned 1
+ 178.6  41 | >> pfctl -a sshuttle-12300 -F all
+ 178.6  41 | >> pfctl -X 11815575273522014363
+ 178.6  41 | firewall manager: Error trying to undo IPv4 firewall.
+ 178.6  41 | firewall manager: ---> Traceback (most recent call last):
+ 178.6  41 | firewall manager: --->   File "/Users/prabhsha/.pex/install/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl.73b9c6a0c49d6b6bf7533478d454b7be51b9d990/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/firewall.py", line 262, in main
+ 178.6  41 | firewall manager: --->     method.restore_firewall(port_v4, socket.AF_INET, udp)
+ 178.6  41 | firewall manager: --->   File "/Users/prabhsha/.pex/install/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl.73b9c6a0c49d6b6bf7533478d454b7be51b9d990/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/methods/pf.py", line 457, in restore_firewall
+ 178.6  41 | firewall manager: --->     pf.disable(pf_get_anchor(family, port))
+ 178.6  41 | firewall manager: --->   File "/Users/prabhsha/.pex/install/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl.73b9c6a0c49d6b6bf7533478d454b7be51b9d990/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/methods/pf.py", line 326, in disable
+ 178.6  41 | firewall manager: --->     pfctl('-X %s' % _pf_context['Xtoken'].pop().decode("ASCII"))
+ 178.6  41 | firewall manager: --->   File "/Users/prabhsha/.pex/install/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl.73b9c6a0c49d6b6bf7533478d454b7be51b9d990/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/methods/pf.py", line 376, in pfctl
+ 178.6  41 | firewall manager: --->     raise Fatal('%r returned %d' % (argv, p.returncode))
+ 178.6  41 | firewall manager: ---> sshuttle.helpers.Fatal: ['pfctl', '-X', '11815575273522014363'] returned 1
+ 188.9 TEL | [82] Running: sudo -n echo -n
+ 188.9 TEL | [82] ran in 0.05 secs.
+ 219.0 TEL | [83] Running: sudo -n echo -n
+ 219.1 TEL | [83] ran in 0.05 secs.
+ 249.2 TEL | [84] Running: sudo -n echo -n
+ 249.2 TEL | [84] ran in 0.05 secs.
+ 279.3 TEL | [85] Running: sudo -n echo -n
+ 279.4 TEL | [85] ran in 0.10 secs.
+ 302.5  41 | Connection to 127.0.0.1 closed by remote host.
+ 302.5  22 | E1106 00:22:26.530982   49364 portforward.go:233] lost connection to pod
+ 302.5 TEL | [41] sshuttle: exit -15
+ 302.5 TEL | [22] kubectl port-forward: exit 0
+ 309.4 TEL | [86] Running: sudo -n echo -n
+ 309.5 TEL | [86] ran in 0.05 secs.
+ 312.3  81 | umount: unmount(/private/tmp/tel-yqg48enx/fs): Invalid argument
+ 312.3 TEL | [81] exit 1 in 133.66 secs.
+ 312.3 TEL | (Cleanup) Unmount remote filesystem failed:
+ 312.3 TEL | (Cleanup)   Command '['umount', '-f', '/tmp/tel-yqg48enx/fs']' returned non-zero exit status 1.
+ 312.3 TEL | (Cleanup) Kill BG process [27] SSH port forward (socks and proxy poll)
+ 312.3 TEL | (Cleanup) Kill Web server for proxy poll
+ 312.4 TEL | (Cleanup) Kill BG process [22] kubectl port-forward
+ 312.4 TEL | (Cleanup) Kill BG process [21] kubectl logs
+ 312.4 TEL | [21] kubectl logs: exit -15
+ 312.4 TEL | Background process (kubectl logs) exited with return code -15. Command was:
+ 312.4 TEL |   kubectl --context oregon14 --namespace ecommerce logs -f telepresence-1573028244-055338-49272-6d95b9d9cf-9s7xh --container telepresence-1573028244-055338-49272 --tail=10
+ 312.4 TEL | 
+ 312.4 TEL | Recent output was:
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 5924
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1b02e8>
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [stdout#info] Failed to lookup b'_ldap._tcp.pdc._msdcs' due to [Failure instance: Traceback (failure with no frames): <class 'twisted.names.error.DNSNameError'>: <Message id=63557 rCode=3 maxSize=0 flags=answer,recDes,recAv queries=[Query('_ldap._tcp.pdc._msdcs', 33, 1)] authority=[<RR name= type=SOA class=IN ttl=30s auth=False>]>
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [stdout#info] ], falling back to b'_ldap._tcp.pdc._msdcs.ant.amazon.com'
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 4454
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1b06d8>
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [-] (UDP Port 5924 Closed)
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1b02e8>
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [-] (UDP Port 4454 Closed)
+ 312.4 TEL |   2019-11-06T08:19:57+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f4e6b1b06d8>
+ 312.4 TEL | (Cleanup) Delete new deployment
+ 312.4 >>> | Cleaning up Deployment telepresence-1573028244-055338-49272
+ 312.4 TEL | [87] Running: kubectl --context oregon14 --namespace ecommerce delete --ignore-not-found svc,deploy --selector=telepresence=4aefcdd00fd04fdf98ced0232520ae70
+ 313.6  87 | deployment.extensions "telepresence-1573028244-055338-49272" deleted
+ 313.6 TEL | [87] ran in 1.22 secs.
+ 313.6 TEL | (Cleanup) Kill sudo privileges holder
+ 313.6 TEL | (Cleanup) Stop time tracking
+ 313.6 TEL | END SPAN main.py:40(main)  313.6s
+ 313.6 TEL | (Cleanup) Remove temporary directory
+ 314.0 TEL | (Cleanup) Save caches
+ 314.5 TEL | (sudo privileges holder thread exiting)

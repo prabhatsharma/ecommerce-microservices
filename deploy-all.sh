@@ -1,5 +1,6 @@
 #!/bin/bash
 
+kubectl apply -f ns.yaml
 kubectl apply -f person/deployment.yaml
 
 kubectl apply -f product/deployment.yaml
