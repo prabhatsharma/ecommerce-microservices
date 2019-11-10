@@ -6,7 +6,7 @@ This can be used to demonstrate:
 2. Live debugging of remote microservices using [OpenVPN](https://openvpn.net/) or [Telepresence](https://www.telepresence.io/)
 
 
-![API interaction](./ecommerce.png)
+![API interaction](./images/ecommerce.png)
 
 I have built only a subset of the APIs (Marked in green) shown in the above diagram that are just enough to demonstrate the functionality.
 
