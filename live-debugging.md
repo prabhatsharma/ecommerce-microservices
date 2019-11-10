@@ -12,7 +12,7 @@
 
 4. Verify the deployment
 
-> kubectl get pod,services
+> kubectl get deploy,pod,services
 
 <pre>
 NAME                                                        READY   STATUS    RESTARTS   AGE
@@ -35,27 +35,10 @@ service/review           ClusterIP   172.20.113.211   <none>        80/TCP    5m
 
 It will ask for local root password in order to be able to set VPN tunnel. Wait ill you get the terminal prompt back.
 
-<iframe width="969" height="606" src="https://www.youtube.com/embed/zgwYQRvKd7A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Watch recorded session at:
+[<img src="https://img.youtube.com/vi/zgwYQRvKd7A/maxresdefault.jpg" WIDTH="600px">](https://www.youtube.com/watch?v=zgwYQRvKd7A)
 
-<pre>
- prabhsha:~$ telepresence
-T: How Telepresence uses sudo: https://www.telepresence.io/reference/install#dependencies
-T: Invoking sudo. Please enter your sudo password.
-Password:
-T: Starting proxy with method 'vpn-tcp', which has the following limitations: All processes are affected, only one telepresence can run per machine, and you can't use other VPNs. You may need to
-T: add cloud hosts and headless services with --also-proxy. For a full list of method limitations see https://telepresence.io/reference/methods.html
-T: Volumes are rooted at $TELEPRESENCE_ROOT. See https://telepresence.io/howto/volumes.html for details.
-T: Starting network proxy to cluster using new Deployment telepresence-1573302116-909097-73772
 
-T: No traffic is being forwarded from the remote Deployment to your local machine. You can use the --expose option to specify which ports you want to forward.
-
-T: Guessing that Services IP range is 172.20.0.0/16. Services started after this point will be inaccessible if are outside this range; restart telepresence if you can't access a new Service.
-T: Connected. Flushing DNS cache.
-T: Setup complete. Launching your command.
-@oregon14| prabhsha:~$
-</pre>
-
-Once you have the prompt back again with Name of your cluster (@oregon14  in my case), you are all set.
 
 6. Test that you are able to access the cluster resources directly.
 
@@ -86,11 +69,28 @@ Output:
 
 Now set environment variable PERSON_SERVICE_URL to http://person.ecommerce.svc.cluster.local/ in way your debugger can use it. For VS code you can add it in the VS code debug configuration.
 
-At this point in time you can open the file [review.go](review/main.go) and debug it using the debugger. While you are debugging the review service you can point your browser to: http://localhost:8081 and you will be able to hit the service.
+At this point in time you can open the file [review/main.go](review/main.go) and debug it using the debugger. While you are debugging the review service you can point your browser to: http://localhost:8081 and you will be able to hit the service.
+
+Watch recorded session at:
+[<img src="https://img.youtube.com/vi/eVat4PfLGcI/maxresdefault.jpg" WIDTH="600px">](https://www.youtube.com/watch?v=eVat4PfLGcI)
+
 
 ![image](./images/scenario2.png)
 
-telepresence --swap-deployment person
+Run the below command
+> telepresence --swap-deployment person
+
+Now run the [person/main.go](person/main.go)
+
+You can now access http://review.ecommerce.svc.cluster.local
+
+Remote review service is now making requests to the local process runnning on your machine.
+
+Any modifications that you make to the local [person/main.go](person/main.go) will be visible when you access http://review.ecommerce.svc.cluster.local
+
+Watch recorded session at:
+[<img src="https://img.youtube.com/vi/0-v6uNh2dvw/maxresdefault.jpg" WIDTH="600px">](https://www.youtube.com/watch?v=0-v6uNh2dvw)
+
 
 
 
